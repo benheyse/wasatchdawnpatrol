@@ -109,6 +109,8 @@ html, body {
   color: var(--text);
   min-height: 100vh;
   line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* ============================================================
@@ -795,6 +797,10 @@ tbody tr.is-fav { opacity: 1 !important; }
   .col-phone { display:none; }
   input.fs { width:110px; }
 
+  .hide-mobile { display: none; }
+  .filter-group-search { width: 100%; }
+  .filter-group-search #f-search { width: 100%; }
+
   /* Badge short labels — mobile only */
   .b-soon .badge-full { display: none; }
   .b-soon .badge-short { display: inline; }
@@ -868,7 +874,7 @@ tbody tr.is-fav { opacity: 1 !important; }
 
   <!-- FILTERS -->
   <div class="filters-bar">
-    <div class="filter-group">
+    <div class="filter-group filter-group-search">
       <span class="filter-label">Search</span>
       <input type="text" class="fs" id="f-search" placeholder="Course name…" oninput="applyFilters()" />
     </div>
@@ -892,7 +898,7 @@ tbody tr.is-fav { opacity: 1 !important; }
         <option value="nodata">Needs Data</option>
       </select>
     </div>
-    <div class="filter-group">
+    <div class="filter-group hide-mobile">
       <span class="filter-label">Data</span>
       <select class="fs" id="f-data" onchange="applyFilters()">
         <option value="">All</option>
@@ -901,7 +907,7 @@ tbody tr.is-fav { opacity: 1 !important; }
         <option value="uat">Needs UAT</option>
       </select>
     </div>
-    <div class="filter-group">
+    <div class="filter-group hide-mobile">
       <span class="filter-label">Distance</span>
       <select class="fs" id="f-dist" onchange="applyFilters()">
         <option value="">All</option>
