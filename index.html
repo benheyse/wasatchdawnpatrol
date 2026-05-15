@@ -561,6 +561,7 @@ tbody tr.row-nodata  { opacity: 0.6; }
 }
 .b-open    { background: var(--sage-100); color: var(--sage-900); }
 .b-soon    { background: var(--gold-100); color: var(--gold-700); }
+.badge-short { display: none; }
 .b-upcoming{ background: var(--blue-100); color: var(--blue-700); }
 .b-nodata  { background: var(--clay-100); color: var(--clay-700); }
 .b-verify  {
@@ -793,6 +794,28 @@ tbody tr.is-fav { opacity: 1 !important; }
   th,td { padding: 6px 8px; }
   .col-phone { display:none; }
   input.fs { width:110px; }
+
+  /* Badge short labels — mobile only */
+  .b-soon .badge-full { display: none; }
+  .b-soon .badge-short { display: inline; }
+
+  /* Expand/detail panel — mobile */
+  .detail-content {
+    padding: 10px 12px 12px 14px;
+  }
+  .note-text,
+  .conditions-text {
+    font-size: 11px;
+    max-width: 100%;
+  }
+  .note-label,
+  .conditions-label {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+  .note-empty {
+    font-size: 11px;
+  }
 }
 </style>
 </head>
@@ -1489,7 +1512,10 @@ function buildRow(r) {
   // Status badge
   const bClass = {open:'b-open',soon:'b-soon',upcoming:'b-upcoming',nodata:'b-nodata'}[r.status];
   const bDot   = {open:'●',soon:'●',upcoming:'',nodata:'!'}[r.status]||'';
-  const badge  = '<span class="badge ' + bClass + '">' + bDot + ' ' + STATUS_LABELS[r.status] + '</span>';
+  const badgeLabel = r.status === 'soon'
+    ? '<span class="badge-full">Opening Soon</span><span class="badge-short">Soon</span>'
+    : STATUS_LABELS[r.status];
+  const badge  = '<span class="badge ' + bClass + '">' + bDot + ' ' + badgeLabel + '</span>';
 
   // Booking opens cell (date only — time lives in its own column now)
   let opensHtml = '—', opensClass = 'c-opens';
