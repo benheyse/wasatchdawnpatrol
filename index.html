@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wasatch Dawn Patrol</title>
+<meta name="description" content="Know when the tee times drop — Salt Lake valley booking windows, live.">
+<meta property="og:title" content="Wasatch Dawn Patrol">
+<meta property="og:description" content="Know when the tee times drop — Salt Lake valley booking windows, live.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://benheyse.github.io/wasatchdawnpatrol/Wasatch%20Dawn%20Patrol%20Logo.png">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="819">
+<meta name="apple-mobile-web-app-title" content="Wasatch Dawn Patrol">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -798,8 +806,9 @@ tbody tr.is-fav { opacity: 1 !important; }
   input.fs { width:110px; }
 
   .hide-mobile { display: none; }
+  .app-footer { display: none; }
   .filter-group-search { width: 100%; }
-  .filter-group-search #f-search { width: 100%; }
+  .filter-group-search #f-search { width: 100%; padding: 10px 12px; font-size: 14px; }
 
   /* Badge short labels — mobile only */
   .b-soon .badge-full { display: none; }
@@ -958,6 +967,7 @@ tbody tr.is-fav { opacity: 1 !important; }
   <div class="dsb-inner">
     <input type="file" id="file-input" accept=".xlsx,.xls" />
     <button class="btn btn-upload-sm" onclick="document.getElementById('file-input').click()">↑ Upload Excel</button>
+    <button class="btn btn-upload-sm" onclick="exportDashboard()" id="btn-export">↓ Export</button>
     <span class="file-badge" id="file-badge"></span>
 
     <span class="last-calc" id="last-calc"></span>
@@ -1779,6 +1789,64 @@ function nextSaturday() {
 
   render();
 })();
+
+// ============================================================
+// EXPORT
+// ============================================================
+function exportDashboard() {
+  const btn = document.getElementById('btn-export');
+  btn.textContent = 'Exporting…';
+  btn.disabled = true;
+
+  function jsEsc(v) {
+    return String(v == null ? '' : v).replace(/\/g, '\\').replace(/"/g, '\"');
+  }
+
+  const rows = courses.map(c => {
+    const name = jsEsc(c.course);
+    const pad  = ' '.repeat(Math.max(0, 33 - name.length));
+    let row = `  {course:"${name}",${pad}` +
+      `tier:"${jsEsc(c.tier)}",holes:${c.holes || 18},` +
+      `distance:"${jsEsc(c.distance)}",distMi:${c.distMi || 0},` +
+      `window:"${jsEsc(c.window)}",opensAt:"${jsEsc(c.opensAt)}",` +
+      `dataStatus:"${jsEsc(c.dataStatus)}",` +
+      `phone:"${jsEsc(c.phone)}",website:"${jsEsc(c.website)}",` +
+      `notes:"${jsEsc(c.notes || '')}"`;
+    if (c.conditionFlag) row += `,conditionFlag:"${jsEsc(c.conditionFlag)}"`;
+    if (c.conditions)    row += `,conditions:"${jsEsc(c.conditions)}"`;
+    row += '}';
+    return row;
+  });
+
+  const today = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  const newFallback =
+    `// FALLBACK DATA — all ${courses.length} courses (exported ${today})\n` +
+    `// opensAt can be a string ("8:00 AM") or numeric fraction (e.g. 0.875 = 9PM)\n` +
+    `// ============================================================\n` +
+    `const FALLBACK = [\n${rows.join(',\n')}\n];`;
+
+  fetch(window.location.href)
+    .then(r => r.text())
+    .then(html => {
+      const updated = html.replace(
+        /\/\/ FALLBACK DATA[\s\S]*?const FALLBACK = \[[\s\S]*?\];/,
+        newFallback
+      );
+      const blob = new Blob([updated], {type: 'text/html'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      btn.textContent = '✓ Exported';
+      setTimeout(() => { btn.textContent = '↓ Export'; btn.disabled = false; }, 2000);
+    })
+    .catch(() => {
+      alert('Export failed — make sure you are running from a server or GitHub Pages, not a local file://');
+      btn.textContent = '↓ Export';
+      btn.disabled = false;
+    });
+}
 </script>
 </body>
 </html>
