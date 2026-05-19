@@ -1060,6 +1060,452 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
   color: #fff;
   vertical-align: 2px;
 }
+
+/* ============================================================
+   iPHONE POLISH — Cards-mode, optimized for ≤640px viewports
+   ============================================================ */
+@media (max-width: 640px) {
+
+  /* ── HEADER ── */
+  .app-header__inner   { padding: 12px 14px; gap: 12px; }
+  .app-header__logo    { width: 48px; }
+  .app-header__title   { font-size: clamp(22px, 7.4vw, 30px); letter-spacing: 0.04em; }
+  .app-header__sub     { font-size: 11px; letter-spacing: 0.16em; gap: 8px; }
+  .app-header__sub::before,
+  .app-header__sub::after { width: 10px; height: 2px; }
+  .app-header__clock   { width: 34px; }
+  .app-header__clock .tick { display: none; }
+  .app-header__rule    { display: none; }
+
+  /* ── DATE BAR ── */
+  .summary-bar { padding: 0; overflow: visible; }
+  .date-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 14px 14px 12px;
+    margin: 0;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    background: var(--surface);
+  }
+  .dp-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .dp-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -14px;
+    padding: 2px 14px 6px;
+    gap: 8px;
+  }
+  .dp-chips::-webkit-scrollbar { display: none; }
+  .dp-chip {
+    flex: 0 0 auto;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .dp-input {
+    width: 100% !important;
+    padding: 11px 12px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+  }
+  .dp-playing {
+    margin-left: 0;
+    font-size: 12px;
+    color: var(--ink-3);
+    padding-top: 2px;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 12px 32px; }
+
+  /* ── FILTERS BAR ── */
+  .filters-bar {
+    padding: 10px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+  .filter-group-search {
+    width: 100%;
+    order: -2;
+    flex: 1 1 100%;
+  }
+  .filter-group-search .filter-label { display: none; }
+  .filter-group-search #f-search {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  .filters-bar .filter-group:not(.filter-group-search) {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+    gap: 4px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filters-bar .filter-label {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+  .filters-bar select.fs {
+    padding: 9px 10px;
+    font-size: 13px;
+    width: 100%;
+    border-radius: 6px;
+  }
+  .filters-bar .fdiv { display: none; }
+  .filters-bar .toggle-row {
+    flex: 0 0 auto;
+    padding: 7px 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    order: 10;
+  }
+  .toggle-row .toggle-label { font-size: 11px; }
+  .filter-ct {
+    flex: 1 1 auto;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    order: 11;
+    color: var(--ink-2);
+  }
+
+  /* ============================================================
+     TABLE → CARDS
+     ============================================================ */
+  .table-wrap {
+    background: transparent;
+    border: 0 !important;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+  .table-scroll { overflow: visible; }
+  table, tbody { display: block; width: 100%; }
+  thead { display: none; }
+
+  /* Section headers (Favorites / All Courses) become block dividers */
+  tbody tr.section-header {
+    display: block;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  tbody tr.section-header td {
+    display: block;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 18px 2px 6px !important;
+    color: var(--ink-3) !important;
+    font-size: 11px !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  tbody tr.section-header:first-child td { padding-top: 6px !important; }
+  tbody tr.section-header .sh-count {
+    color: var(--ink-3);
+    font-weight: 600;
+    margin-left: 6px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* Data row → card */
+  tbody tr[data-key] {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    column-gap: 10px;
+    row-gap: 6px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 14px 14px 12px;
+    margin: 0 0 10px;
+    box-shadow: 0 1px 2px rgba(40,30,10,0.04);
+    position: relative;
+  }
+  tbody tr[data-key]:hover { background: var(--surface) !important; }
+
+  /* Reset all td defaults so they obey grid placement */
+  tbody tr[data-key] > td {
+    display: block;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+    white-space: normal;
+    background: transparent !important;
+  }
+
+  /* Row 1 — star · name · tier */
+  tbody tr[data-key] > td.col-star {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+    padding-top: 1px !important;
+  }
+  tbody tr[data-key] > td.c-name {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    white-space: normal;
+    padding-right: 4px;
+  }
+  tbody tr[data-key] > td.c-name .expand-chev {
+    display: none;
+  }
+  /* Replace expand-chev with a card-corner chev that's a clearer affordance */
+  tbody tr[data-key]::after {
+    content: "›";
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--ink-4);
+    opacity: 0.55;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    pointer-events: none;
+    display: none; /* off by default; we show via tier-cell shift instead below */
+  }
+  /* FRESH pseudo-pill: make it smaller, prevent name-row breakage */
+  tbody tr[data-key].row-fresh > td.c-name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+  }
+  tbody tr[data-key].row-fresh > td.c-name::after {
+    margin-left: 0;
+    padding: 1px 6px;
+    font-size: 9px;
+    vertical-align: baseline;
+  }
+  /* Tier — col 3, row 1 */
+  tbody tr[data-key] > td:nth-child(8) {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: right;
+    align-self: center;
+  }
+  tbody tr[data-key] > td:nth-child(8) .c-tier {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 8px;
+    border-radius: 6px;
+    background: var(--sage-100);
+    color: var(--sage-900);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  /* Row 2 — status badge (left) + countdown (right) */
+  tbody tr[data-key] > td:nth-child(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  tbody tr[data-key] > td.c-until {
+    grid-column: 3;
+    grid-row: 2;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Row 3 — Big "When booking opens" line: date (left) · time (right) */
+  tbody tr[data-key] > td.c-opens {
+    grid-column: 2;
+    grid-row: 3;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    padding-top: 4px;
+  }
+  tbody tr[data-key] > td.c-opens.is-miss {
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+  tbody tr[data-key] > td:nth-child(6) {
+    grid-column: 3;
+    grid-row: 3;
+    text-align: right;
+    padding-top: 4px;
+  }
+  tbody tr[data-key] > td:nth-child(6) .b-time {
+    font-size: 12px;
+    padding: 3px 9px;
+  }
+
+  /* Row 4 — phone (left) + website (right) */
+
+  /* Hidden in card view (still visible at larger breakpoints) */
+  tbody tr[data-key] > td:nth-child(7)  { display: none; } /* window */
+  tbody tr[data-key] > td:nth-child(9)  { display: none; } /* distance */
+  tbody tr[data-key] > td:nth-child(10) { display: none; } /* holes */
+  tbody tr[data-key] > td:nth-child(11) { display: none; } /* data status */
+
+  /* Phone — force visible (desktop hides via .col-phone) */
+  tbody tr[data-key] > td.col-phone {
+    display: block !important;
+    grid-column: 2;
+    grid-row: 4;
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px dashed var(--line);
+  }
+  /* Website — bring back on mobile as a Visit pill on the right */
+  tbody tr[data-key] > td.c-link {
+    display: block;
+    grid-column: 3;
+    grid-row: 4;
+    text-align: right;
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px dashed var(--line);
+  }
+  tbody tr[data-key] > td.c-link a {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--sage-50);
+    border: 1px solid color-mix(in srgb, var(--sage-600) 35%, transparent);
+    font-size: 11px;
+    color: var(--sage-700);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  tbody tr[data-key] > td.col-phone a {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--ink-2);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    max-width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  tbody tr[data-key] > td.col-phone a::before {
+    content: "📞 ";
+  }
+  /* Soft cap so the action area sits cleanly even when ds is empty */
+  tbody tr[data-key] > td:nth-child(11):empty { border-top: 0; padding-top: 0; }
+
+  /* ── Status-row card emphasis (cards, not table rows) ── */
+  tbody tr[data-key].row-open {
+    opacity: 0.55;
+    background: var(--surface) !important;
+  }
+  tbody tr[data-key].row-soon {
+    background: color-mix(in srgb, var(--gold-50) 70%, white) !important;
+    border-color: var(--gold-300);
+    box-shadow: 0 1px 2px rgba(201,130,26,0.10), inset 3px 0 0 var(--gold-300);
+  }
+  tbody tr[data-key].row-fresh {
+    background: color-mix(in srgb, var(--sage-600) 8%, white) !important;
+    border-color: color-mix(in srgb, var(--sage-600) 40%, transparent);
+    box-shadow: 0 1px 2px rgba(110,140,78,0.12), inset 4px 0 0 var(--sage-600);
+    opacity: 1;
+  }
+  tbody tr[data-key].is-fav {
+    border-color: var(--blue-300);
+    box-shadow: 0 1px 2px rgba(40,30,10,0.04), inset 3px 0 0 var(--blue-500);
+  }
+  /* If both fav AND soon, prefer soon's gold rail but tint border blue */
+  tbody tr[data-key].is-fav.row-soon {
+    border-color: var(--blue-300);
+    box-shadow: 0 1px 2px rgba(201,130,26,0.10), inset 3px 0 0 var(--gold-300);
+  }
+
+  /* Star bigger tap target on touch */
+  .fav-btn { padding: 6px; }
+  .fav-btn svg { width: 18px; height: 18px; }
+
+  /* Open-now de-emphasis tweaks for cards */
+  tbody tr[data-key].row-open .b-time.is-open { text-decoration: line-through; }
+
+  /* ── DETAIL ROW ── */
+  tbody tr.detail-row {
+    display: block;
+    background: transparent !important;
+    margin: 0 0 10px;
+  }
+  tbody tr.detail-row > td {
+    display: block;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+  tbody tr.detail-row .detail-content {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 0;
+    border-radius: 0 0 14px 14px;
+    padding: 12px 14px 14px;
+    margin: 0;
+  }
+  /* When a card is expanded, flatten its bottom corners to join the detail */
+  tbody tr[data-key].row-expanded {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 0;
+    box-shadow: 0 1px 2px rgba(40,30,10,0.04);
+  }
+  tbody tr[data-key].row-expanded.row-soon { box-shadow: inset 3px 0 0 var(--gold-300); }
+  tbody tr[data-key].row-expanded.row-fresh { box-shadow: inset 4px 0 0 var(--sage-600); }
+  tbody tr[data-key].row-expanded.is-fav    { box-shadow: inset 3px 0 0 var(--blue-500); }
+
+  /* Surface website + phone tap-row inside expanded detail too */
+  .detail-content .note-text { font-size: 13px; line-height: 1.55; }
+  .detail-content .note-label { font-size: 9px; }
+
+  /* ── DATA-SOURCE BAR ── */
+  .data-source-bar { padding: 0 14px; }
+  .dsb-inner { padding: 10px 0; justify-content: center; gap: 6px; }
+  .file-badge { font-size: 10px; }
+  .last-calc  { font-size: 10px; }
+}
+
+/* Extra-small: iPhone SE / Mini (≤380px) */
+@media (max-width: 380px) {
+  .app-header__title { font-size: 21px; letter-spacing: 0.03em; }
+  .app-header__logo  { width: 44px; }
+  .app-header__clock { width: 30px; }
+
+  tbody tr[data-key] > td.c-name  { font-size: 15px; }
+  tbody tr[data-key] > td.c-opens { font-size: 14px; }
+  tbody tr[data-key] > td.c-until { font-size: 12px; }
+
+  .filters-bar .filter-group:not(.filter-group-search) {
+    flex: 1 1 100%;
+  }
+}
 </style>
 
 <script>
