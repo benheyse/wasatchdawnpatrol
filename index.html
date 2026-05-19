@@ -33,14 +33,14 @@
   --cream:     #F1ECDC;
 
   /* Sage — brand accent (active, confirmed, fresh, tiers) */
-  --sage-50:   #F3F6EB;
-  --sage-100:  #E2EBCB;
-  --sage-200:  #C9D9A5;
-  --sage-300:  #A8C27A;
-  --sage-500:  #82A459;
-  --sage-600:  #6E8C4E;
-  --sage-700:  #5A7340;
-  --sage-900:  #2F3D22;
+  --sage-50:   #E6F5E1;
+  --sage-100:  #C5E7BC;
+  --sage-200:  #98D38B;
+  --sage-300:  #6CB058;
+  --sage-500:  #2D9C18;
+  --sage-600:  #0D8600;
+  --sage-700:  #086800;
+  --sage-900:  #053500;
 
   /* Gold — opening soon / warning (the actionable hue) */
   --gold-50:   #FAF1DA;
@@ -57,6 +57,14 @@
   --blue-500:  #6F8AA3;
   --blue-700:  #4C667E;
 
+  /* Apple-system accents — used sparingly, one pop per row */
+  --accent:        #0066CC;   /* primary actions, active chip, focus rings */
+  --accent-hover:  #0055AA;
+  --accent-soft:   #E8F0FA;
+  --warn:          #9B0101;   /* opening-soon urgency — countdown only */
+  --warn-ink:      #9B0101;   /* readable on white at this saturation */
+  --warn-soft:     rgba(155,1,1,0.10);
+
   /* Clay — needs data / alert */
   --clay-50:   #F8E8E0;
   --clay-100:  #EFCFBF;
@@ -64,11 +72,11 @@
   --clay-700:  #7A3520;
 
   /* Warm neutrals */
-  --paper:     #f4f6f4;     /* page background — cool gray */
+  --paper:     #f5f5f7;     /* page background — Apple-style cool gray */
   --surface:   #FFFFFF;     /* cards / table */
   --surface-2: #FBF8EF;     /* alt panel */
-  --line:      #E2DBC4;     /* warm borders */
-  --line-2:    #CDC4A8;
+  --line:      #D2D2D7;     /* Apple-style cool gray borders */
+  --line-2:    #C7C7CC;
   --ink:       #1B2330;
   --ink-2:     #4A5564;
   --ink-3:     #7B8694;
@@ -127,15 +135,15 @@ html, body {
 .app-header {
   --brand-bg:       #040f1f;
   --brand-ink:      #F1ECDC;   /* cream wordmark */
-  --brand-accent:   #A8C27A;   /* sage green */
-  --brand-accent-2: #6E8C4E;   /* deeper green for rules */
+  --brand-accent:   #6CB058;   /* leaf green on dark header */
+  --brand-accent-2: #0D8600;   /* deeper green for rules */
   --brand-muted:    #6F8AA3;   /* dusty blue for tagline */
-  --brand-line:     rgba(168,194,122,0.55);
+  --brand-line:     rgba(108,176,88,0.55);
 
   background:
-    radial-gradient(ellipse 1200px 240px at 50% -40%, rgba(168,194,122,0.06), transparent 60%),
+    radial-gradient(ellipse 1200px 240px at 50% -40%, rgba(108,176,88,0.06), transparent 60%),
     linear-gradient(180deg, #061427 0%, #040f1f 70%, #03101e 100%);
-  border-bottom: 1px solid rgba(168,194,122,0.12);
+  border-bottom: 1px solid rgba(108,176,88,0.12);
   box-shadow: 0 4px 18px rgba(0,0,0,0.45);
   color: var(--brand-ink);
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -246,7 +254,7 @@ html, body {
 .app-header__clock .pivot { fill: var(--brand-accent); }
 .app-header__clock .glow  {
   position:absolute; inset:-8px; border-radius:50%;
-  background: radial-gradient(circle, rgba(168,194,122,0.18), transparent 65%);
+  background: radial-gradient(circle, rgba(108,176,88,0.18), transparent 65%);
   pointer-events:none;
 }
 
@@ -255,7 +263,7 @@ html, body {
   display:none;
   width: 1px;
   align-self: stretch;
-  background: linear-gradient(180deg, transparent, rgba(168,194,122,0.35), transparent);
+  background: linear-gradient(180deg, transparent, rgba(108,176,88,0.35), transparent);
   margin: 0 4px;
 }
 
@@ -417,7 +425,7 @@ input[type="date"]:hover { background: #f8fafc; }
 }
 .dp-chip {
   background: #fff;
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent);
   border-radius: 999px;
   padding: 6px 14px;
   font-size: 13px;
@@ -429,18 +437,18 @@ input[type="date"]:hover { background: #f8fafc; }
   line-height: 1.2;
 }
 .dp-chip:hover {
-  border-color: var(--slate-400);
-  background: var(--slate-50);
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 .dp-chip.is-active {
-  background: var(--sage-600);
-  border-color: var(--sage-600);
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
-  box-shadow: 0 1px 2px rgba(110,140,78,0.25);
+  box-shadow: 0 1px 2px rgba(0,102,204,0.20);
 }
 .dp-chip.is-active:hover {
-  background: var(--sage-700);
-  border-color: var(--sage-700);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 .dp-input {
   /* override the dark-header date input style — this lives on white now */
@@ -449,7 +457,7 @@ input[type="date"]:hover { background: #f8fafc; }
   color: var(--text) !important;
   color-scheme: light;
 }
-.dp-input:hover { background: var(--slate-50) !important; }
+.dp-input:hover { background: var(--accent-soft) !important; }
 .dp-playing {
   margin-left: auto;
   font-size: 13px;
@@ -458,7 +466,7 @@ input[type="date"]:hover { background: #f8fafc; }
   font-weight: 500;
 }
 .dp-playing strong {
-  color: var(--sage-600);
+  color: var(--accent);
   font-weight: 700;
   margin-left: 4px;
 }
@@ -502,15 +510,15 @@ select.fs, input.fs {
   outline: none;
 }
 select.fs:focus, input.fs:focus {
-  border-color: var(--sage-600);
-  box-shadow: 0 0 0 2px rgba(110,140,78,0.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,102,204,0.18);
 }
 input.fs { width: 155px; }
 .fdiv { width:1px; height:20px; background:var(--border); margin:0 2px; }
 .toggle-row {
   display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;
 }
-.toggle-row input { accent-color: var(--sage-600); width:14px; height:14px; cursor:pointer; }
+.toggle-row input { accent-color: var(--accent); width:14px; height:14px; cursor:pointer; }
 .toggle-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
 .filter-ct { font-size: 11px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
 
@@ -572,7 +580,7 @@ tbody tr.row-nodata  { opacity: 0.6; }
 .b-open    { background: var(--sage-100); color: var(--sage-900); }
 .b-soon    { background: var(--gold-100); color: var(--gold-700); }
 .badge-short { display: none; }
-.b-upcoming{ background: var(--blue-100); color: var(--blue-700); }
+.b-upcoming{ background: #D2D2D7; color: var(--ink); }
 .b-nodata  { background: var(--clay-100); color: var(--clay-700); }
 .b-verify  {
   display: inline-flex; align-items: center; gap: 3px;
@@ -663,20 +671,14 @@ tbody tr[data-key].row-expanded .expand-chev {
 }
 /* Course condition flag warning */
 .condition-flag {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  background: var(--gold-100);
-  color: var(--gold-700);
-  border: 1px solid var(--gold-300);
-  border-radius: 4px;
-  padding: 1px 6px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  margin-left: 7px;
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.95em;
+  line-height: 1;
   vertical-align: middle;
   white-space: nowrap;
+  /* Force the red-flag emoji to render as a colored glyph rather than B/W text */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
 }
 .conditions-label {
   font-size: 0.7rem;
@@ -736,16 +738,16 @@ tbody tr.is-fav { opacity: 1 !important; }
   color: var(--slate-700);
   border: 1px solid var(--border);
 }
-.b-time.is-open { background: var(--sage-600); color: #fff; border-color: var(--sage-600); box-shadow: 0 1px 2px rgba(110,140,78,0.25); }
+.b-time.is-open { background: var(--sage-600); color: #fff; border-color: var(--sage-600); box-shadow: 0 1px 2px rgba(13,134,0,0.25); }
 .b-time.is-soon { background: var(--gold-100); color: var(--gold-700); border-color: var(--gold-300); }
 .b-time.is-miss { background: transparent; color: var(--ink-3); border-style: dashed; font-weight: 400; font-style: italic; }
 
 /* CELL STYLES */
 .c-name  { font-weight: 600; white-space: nowrap; }
 .c-tier  { font-weight: 700; font-size: 13px; }
-.tier-A  { color: var(--sage-600); }
-.tier-B  { color: var(--sage-600); }
-.tier-C  { color: var(--text-muted); }
+.tier-A  { color: var(--accent); }
+.tier-B  { color: var(--accent); }
+.tier-C  { color: var(--accent); }
 .c-opens { font-weight: 700; font-size: 13px; white-space: nowrap; }
 .c-opens.is-open { color: var(--green-700); }
 .c-opens.is-soon { color: var(--amber-600); }
@@ -756,10 +758,10 @@ tbody tr.is-fav { opacity: 1 !important; }
 .tu-mute { color: var(--slate-400); font-weight: 400; }
 .c-dim   { color: var(--text-muted); font-size:12px; white-space: nowrap; }
 .c-note  { max-width:200px; font-size:11px; color:var(--text-muted); line-height:1.4; }
-.c-link a{ color: var(--green-700); text-decoration:none; font-size:12px; }
+.c-link a{ color: var(--accent); text-decoration:none; font-size:12px; }
 .c-link a:hover { text-decoration:underline; }
 .c-phone a{ color:var(--text-muted); text-decoration:none; font-size:12px; }
-.c-phone a:hover { color:var(--green-700); }
+.c-phone a:hover { color:var(--accent); }
 .btn-cp {
   background: none;
   border: 1px solid var(--border);
@@ -1003,26 +1005,55 @@ tbody tr.row-open:hover { opacity: 0.85; background: var(--surface-2) !important
 .c-opens.is-open { color: var(--ink-3) !important; font-weight: 400; }
 .tu-open { color: var(--ink-3) !important; font-weight: 400; }
 
-/* ── Emphasis: opening-soon rows pop (warm honey gold) ── */
+/* ── Emphasis: opening-soon rows ── Apple-minimal: ONE eye-catch.
+   Row background stays clean; a thin colored rail flags state; only the
+   live countdown ticker pops in orange. Pills/time stay neutral. */
 tbody tr.row-soon {
-  background: color-mix(in srgb, var(--gold-50) 55%, white) !important;
-  box-shadow: inset 3px 0 0 var(--gold-300);
+  background: transparent !important;
+  box-shadow: inset 3px 0 0 var(--warn);
 }
-tbody tr.row-soon:hover { background: var(--gold-50) !important; }
+tbody tr.row-soon:hover { background: var(--surface-2) !important; }
 .b-soon {
-  background: var(--gold-500) !important;
-  color: #fff !important;
-  font-weight: 700;
-  box-shadow: 0 1px 2px rgba(201,130,26,0.30);
+  background: transparent !important;
+  color: var(--warn-ink) !important;
+  border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent) !important;
+  font-weight: 600;
+  box-shadow: none !important;
 }
 .b-time.is-soon {
-  background: var(--gold-500) !important;
-  color: #fff !important;
-  border-color: var(--gold-500) !important;
-  box-shadow: 0 1px 3px rgba(201,130,26,0.35);
+  background: transparent !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+  box-shadow: none !important;
+  font-weight: 600;
 }
-.c-opens.is-soon { color: var(--gold-700) !important; font-weight: 700; }
-.tu-soon { color: var(--gold-700) !important; font-weight: 800; }
+.c-opens.is-soon { color: var(--ink) !important; font-weight: 700; }
+.tu-soon { color: var(--warn) !important; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+/* Opening-soon rows: red outline on the time pill so the urgency reads at a glance */
+tbody tr.row-soon .b-time {
+  border-color: var(--warn) !important;
+  color: var(--warn-ink) !important;
+  box-shadow: inset 0 0 0 1px var(--warn) !important;
+}
+
+/* Time pill is never bold — keep it light across every status */
+.b-time,
+.b-time.is-open,
+.b-time.is-soon,
+.b-time.is-miss,
+.row-fresh .b-time.is-open,
+tbody tr.row-soon .b-time {
+  font-weight: 500 !important;
+}
+
+/* Upcoming status (no .is-* modifier): solid #D2D2D7 fill */
+.b-time:not(.is-open):not(.is-soon):not(.is-miss) {
+  background: #D2D2D7 !important;
+  border-color: #D2D2D7 !important;
+  color: var(--ink) !important;
+  box-shadow: none !important;
+}
 
 /* ── Fresh rows: opened within the last 48h ─ sage tint, brand-positive ── */
 tbody tr.row-fresh {
@@ -1032,20 +1063,20 @@ tbody tr.row-fresh {
 }
 tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, white) !important; }
 .row-fresh .b-open {
-  background: color-mix(in srgb, var(--sage-600) 14%, white) !important;
-  color: var(--sage-700) !important;
-  border: 1px solid color-mix(in srgb, var(--sage-600) 35%, transparent) !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--line) !important;
   font-weight: 600;
 }
 .row-fresh .b-time.is-open {
-  background: color-mix(in srgb, var(--sage-600) 12%, white) !important;
-  color: var(--sage-700) !important;
-  border-color: var(--sage-600) !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
   text-decoration: none !important;
   font-weight: 700;
 }
-.row-fresh .c-opens.is-open { color: var(--sage-700) !important; font-weight: 600; }
-.row-fresh .tu-open { color: var(--sage-700) !important; font-weight: 400; }
+.row-fresh .c-opens.is-open { color: var(--ink) !important; font-weight: 600; }
+.row-fresh .tu-open { color: var(--ink-2) !important; font-weight: 500; }
 .row-fresh .c-name::after {
   content: " fresh";
   display: inline-block;
@@ -1119,13 +1150,20 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     font-weight: 600;
   }
   .dp-input {
-    /* Compact intrinsic width so the date selector doesn't push the page wide */
+    /* Wide enough that the native calendar icon stays visible */
     width: auto !important;
-    max-width: 200px;
+    max-width: 100%;
+    min-width: 170px;
     align-self: flex-start;
     padding: 9px 10px !important;
     font-size: 13px !important;
     border-radius: 8px !important;
+  }
+  .dp-input::-webkit-calendar-picker-indicator {
+    opacity: 1;
+    display: block;
+    margin-left: 8px;
+    cursor: pointer;
   }
   .dp-playing {
     margin-left: 0;
@@ -1182,7 +1220,7 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
   .filters-bar .toggle-row {
     flex: 0 0 auto;
     padding: 7px 12px;
-    background: var(--surface-2);
+    background: #f5f5f7;
     border: 1px solid var(--line);
     border-radius: 999px;
     order: 10;
@@ -1248,7 +1286,7 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     border: 1px solid var(--line);
     border-radius: 14px;
     padding: 10px 12px;
-    margin: 0 0 8px;
+    margin: 0 0 5px;
     box-shadow: 0 1px 2px rgba(40,30,10,0.04);
     position: relative;
   }
@@ -1269,7 +1307,7 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     grid-column: 1;
     grid-row: 1 / span 2;
     align-self: start;
-    padding-top: 0 !important;
+    padding-top: 3px !important;
     /* Match the first text line of the course title so the star sits on the same
        baseline (title is 16px × 1.25 line-height = 20px line box). */
     height: 20px;
@@ -1286,7 +1324,7 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     height: 18px;
   }
   tbody tr[data-key] > td.c-name {
-    grid-column: 2 / span 2;
+    grid-column: 2;
     grid-row: 1;
     font-size: 16px;
     font-weight: 700;
@@ -1345,29 +1383,36 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     line-height: 1;
   }
 
-  /* Row 1 — status badge in the top-right (col 4) */
+  /* Row 3 — status badge on the LEFT, paired with the Visit pill on the right.
+     The status cell spans cols 2–4 so its top divider runs unbroken across
+     the whole row; the Visit pill is overlaid in col 4 on the same row. */
   tbody tr[data-key] > td:nth-child(2) {
-    grid-column: 4;
-    grid-row: 1;
-    align-self: center;
-    justify-self: end;
-    text-align: right;
+    grid-column: 2 / span 3;
+    grid-row: 3;
+    align-self: start;
+    justify-self: stretch;
+    text-align: left;
+    padding-top: 8px;
+    margin-top: 2px;
+    border-top: 1px solid #D2D2D7;
   }
   tbody tr[data-key] > td:nth-child(2) .badge {
     font-size: 10px;
     padding: 3px 8px;
     letter-spacing: 0.04em;
   }
-  /* Countdown — row 2 between the date (col 2) and the time pill (col 4) */
+  /* Countdown — row 1, col 3 (next to the course name) */
   tbody tr[data-key] > td.c-until {
     grid-column: 3;
-    grid-row: 2;
+    grid-row: 1;
+    align-self: center;
     text-align: right;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--ink-3);
     font-variant-numeric: tabular-nums;
-    padding: 2px 4px 0;
+    padding: 0;
+    margin-right: -2px;
     white-space: nowrap;
   }
 
@@ -1377,8 +1422,13 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     grid-row: 2;
     font-size: 15px;
     font-weight: 700;
-    color: var(--ink);
+    color: #6E6E73;
     padding-top: 2px;
+  }
+  /* Same mid-grey date color for Opening Soon & Open Now cards on mobile */
+  tbody tr[data-key] > td.c-opens.is-soon,
+  tbody tr[data-key] > td.c-opens.is-open {
+    color: #6E6E73 !important;
   }
   tbody tr[data-key] > td.c-opens.is-miss {
     font-weight: 500;
@@ -1386,17 +1436,18 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
   }
   tbody tr[data-key] > td:nth-child(6) {
     grid-column: 4;
-    grid-row: 2;
+    grid-row: 1;
+    align-self: center;
     text-align: right;
-    padding-top: 2px;
+    padding-top: 0;
   }
   /* "at" connector between the countdown (col 3) and the time pill (col 4) */
   tbody tr[data-key] > td:nth-child(6)::before {
-    content: "at ";
+    content: "at";
     font-size: 11px;
     font-weight: 600;
     color: var(--ink-3);
-    margin-right: 4px;
+    margin-right: 6px;
     font-variant-numeric: normal;
   }
   tbody tr[data-key] > td:nth-child(6) .b-time {
@@ -1419,26 +1470,72 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     grid-row: 3;
     padding-top: 6px;
     margin-top: 2px;
-    border-top: 1px dashed var(--line);
+    border-top: 1px solid #D2D2D7;
   }
-  /* Website — bring back on mobile as a Visit pill on the right */
+  /* Phone moves to the expandable detail on mobile — hide from the card */
+  tbody tr[data-key] > td.col-phone {
+    display: none !important;
+  }
+
+  /* Visit pill shares row 3 with the status badge (status left, visit right) */
+  tbody tr[data-key] > td.c-link {
+    grid-column: 3 / span 2;
+  }
+
+  /* Phone-in-detail row — mobile only */
+  .detail-content .detail-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 0 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #D2D2D7;
+  }
+  .detail-phone-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+  }
+  .detail-phone-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #f5f5f7;
+    border: 1px solid var(--line);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .detail-phone-btn::before {
+    content: "\1F4DE\FE0E";
+    font-size: 11px;
+  }
+
+  /* Website — bring back on mobile as a Visit pill on the right.
+     Sits in the same row 3 as the status cell (which carries the divider). */
   tbody tr[data-key] > td.c-link {
     display: block;
     grid-column: 4;
     grid-row: 3;
+    align-self: start;
     text-align: right;
-    padding-top: 6px;
+    padding-top: 8px;
     margin-top: 2px;
-    border-top: 1px dashed var(--line);
   }
   tbody tr[data-key] > td.c-link a {
     display: inline-block;
     padding: 4px 10px;
     border-radius: 999px;
-    background: var(--sage-50);
-    border: 1px solid color-mix(in srgb, var(--sage-600) 35%, transparent);
+    background: transparent;
+    border: 1px solid var(--accent);
     font-size: 11px;
-    color: var(--sage-700);
+    color: var(--accent);
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
@@ -1447,7 +1544,7 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     display: inline-block;
     padding: 4px 10px;
     border-radius: 999px;
-    background: var(--surface-2);
+    background: #f5f5f7;
     border: 1px solid var(--line);
     font-size: 11px;
     color: var(--ink-2);
@@ -1469,24 +1566,24 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     background: var(--surface) !important;
   }
   tbody tr[data-key].row-soon {
-    background: color-mix(in srgb, var(--gold-50) 70%, white) !important;
-    border-color: var(--gold-300);
-    box-shadow: 0 1px 2px rgba(201,130,26,0.10), inset 3px 0 0 var(--gold-300);
+    background: var(--surface) !important;
+    border-color: var(--line);
+    box-shadow: 0 1px 2px rgba(40,30,10,0.04), inset 3px 0 0 var(--warn);
   }
   tbody tr[data-key].row-fresh {
-    background: color-mix(in srgb, var(--sage-600) 8%, white) !important;
-    border-color: color-mix(in srgb, var(--sage-600) 40%, transparent);
-    box-shadow: 0 1px 2px rgba(110,140,78,0.12), inset 4px 0 0 var(--sage-600);
+    background: var(--surface) !important;
+    border-color: var(--line);
+    box-shadow: 0 1px 2px rgba(40,30,10,0.04), inset 4px 0 0 var(--sage-600);
     opacity: 1;
   }
   tbody tr[data-key].is-fav {
     border-color: var(--blue-300);
     box-shadow: 0 1px 2px rgba(40,30,10,0.04), inset 3px 0 0 var(--blue-500);
   }
-  /* If both fav AND soon, prefer soon's gold rail but tint border blue */
+  /* If both fav AND soon, prefer soon's orange rail but tint border blue */
   tbody tr[data-key].is-fav.row-soon {
     border-color: var(--blue-300);
-    box-shadow: 0 1px 2px rgba(201,130,26,0.10), inset 3px 0 0 var(--gold-300);
+    box-shadow: 0 1px 2px rgba(40,30,10,0.04), inset 3px 0 0 var(--warn);
   }
 
   /* Star bigger tap target on touch */
@@ -1522,7 +1619,7 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     margin-bottom: 0;
     box-shadow: 0 1px 2px rgba(40,30,10,0.04);
   }
-  tbody tr[data-key].row-expanded.row-soon { box-shadow: inset 3px 0 0 var(--gold-300); }
+  tbody tr[data-key].row-expanded.row-soon { box-shadow: inset 3px 0 0 var(--warn); }
   tbody tr[data-key].row-expanded.row-fresh { box-shadow: inset 4px 0 0 var(--sage-600); }
   tbody tr[data-key].row-expanded.is-fav    { box-shadow: inset 3px 0 0 var(--blue-500); }
 
@@ -1551,6 +1648,9 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     flex: 1 1 100%;
   }
 }
+
+/* Phone-in-detail wrapper hidden by default; only shown inside the mobile breakpoint above */
+.detail-phone { display: none; }
 </style>
 
 <script>
@@ -2081,7 +2181,7 @@ function buildRow(r) {
     '<td class="col-star">' + starHtml + '</td>',
     '<td>' + badge + '</td>',
     '<td class="c-name">' + esc(r.course)
-      + (r.conditionFlag && r.conditionFlag.toLowerCase() === 'yes' ? '<span class="condition-flag">⚠ Alert</span>' : '')
+      + (r.conditionFlag && r.conditionFlag.toLowerCase() === 'yes' ? '<span class="condition-flag" aria-label="Course condition alert" title="Course condition alert">🚩</span>' : '')
       + '<span class="expand-chev">&#9656;</span></td>',
     '<td class="' + untilClass + '">' + untilHtml + '</td>',
     '<td class="' + opensClass + '">' + opensHtml + '</td>',
@@ -2096,6 +2196,9 @@ function buildRow(r) {
     '</tr>',
     '<tr class="detail-row"><td colspan="13"><div class="detail-inner"><div class="detail-inner-clip">',
     '<div class="detail-content">',
+    (r.phone
+      ? '<div class="detail-phone"><span class="detail-phone-label">Call</span><a class="detail-phone-btn" href="tel:' + r.phone.replace(/\D/g,'') + '">' + esc(r.phone) + '</a></div>'
+      : ''),
     (r.conditionFlag && r.conditionFlag.toLowerCase() === 'yes' && r.conditions
       ? '<div class="conditions-label">⚠ Course Conditions</div><p class="conditions-text">' + esc(r.conditions) + '</p>'
       : ''),
