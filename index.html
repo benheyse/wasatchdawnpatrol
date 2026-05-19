@@ -134,7 +134,7 @@ html, body {
    ============================================================ */
 .notice-banner {
   width: 100%;
-  background: var(--warn);                  /* brand red */
+  background: #7E212B;
   color: #FFFFFF;
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-weight: 500;
@@ -522,6 +522,15 @@ input[type="date"]:hover { background: #f8fafc; }
   color: var(--text) !important;
   color-scheme: light;
   box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  /* iOS Safari hides the native calendar-picker indicator on <input type="date">,
+     so paint our own calendar glyph as a background image on the right edge. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230066CC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2'/><line x1='16' y1='2' x2='16' y2='6'/><line x1='8' y1='2' x2='8' y2='6'/><line x1='3' y1='10' x2='21' y2='10'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 16px 16px !important;
+  padding-right: 32px !important;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .dp-input:hover { background: var(--accent-soft) !important; }
 .dp-playing {
@@ -1190,9 +1199,15 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    margin: 0 -14px;
-    padding: 2px 14px 6px;
+    /* Stay inside the date-bar's padding box so the last chip can't bleed
+       past the viewport. The trailing padding gives the last chip breathing
+       room from the right edge and makes the scroll affordance feel natural. */
+    margin: 0;
+    padding: 2px 16px 6px 0;
     gap: 8px;
+    /* Mask a soft fade on the right so users see there's more to scroll to. */
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 18px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 18px), transparent 100%);
   }
   .dp-chips::-webkit-scrollbar { display: none; }
   .dp-chip {
