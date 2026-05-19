@@ -533,6 +533,12 @@ input[type="date"]:hover { background: #f8fafc; }
   appearance: none;
 }
 .dp-input:hover { background: var(--accent-soft) !important; }
+.dp-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 100%;
+}
 .dp-playing {
   margin-left: auto;
   font-size: 13px;
@@ -1222,9 +1228,12 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     max-width: 100%;
     min-width: 170px;
     align-self: flex-start;
-    padding: 9px 10px !important;
+    padding: 9px 10px 9px 10px !important;
     font-size: 13px !important;
     border-radius: 8px !important;
+    /* Native icon handles the indicator — remove the custom SVG background */
+    background-image: none !important;
+    padding-right: 10px !important;
   }
   .dp-input::-webkit-calendar-picker-indicator {
     opacity: 1;
