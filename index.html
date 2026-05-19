@@ -130,23 +130,87 @@ html, body {
 }
 
 /* ============================================================
+   NOTICE BANNER — system message strip above the header
+   ============================================================ */
+.notice-banner {
+  width: 100%;
+  background: var(--warn);                  /* brand red */
+  color: #FFFFFF;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-align: center;
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+}
+.notice-banner__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: block;
+}
+/* A bit taller / more breathable on mobile so the message has room to wrap */
+@media (max-width: 767px) {
+  .notice-banner {
+    font-size: 13.5px;
+    padding: 14px 16px;
+    line-height: 1.4;
+  }
+}
+@media (max-width: 479px) {
+  .notice-banner {
+    font-size: 13px;
+    padding: 16px 14px;
+    line-height: 1.45;
+  }
+}
+
+/* ============================================================
    HEADER — Wasatch Dawn Patrol brand bar
    ============================================================ */
 .app-header {
-  --brand-bg:       #040f1f;
-  --brand-ink:      #F1ECDC;   /* cream wordmark */
-  --brand-accent:   #6CB058;   /* leaf green on dark header */
-  --brand-accent-2: #0D8600;   /* deeper green for rules */
-  --brand-muted:    #6F8AA3;   /* dusty blue for tagline */
-  --brand-line:     rgba(108,176,88,0.55);
-
-  background:
-    radial-gradient(ellipse 1200px 240px at 50% -40%, rgba(108,176,88,0.06), transparent 60%),
-    linear-gradient(180deg, #061427 0%, #040f1f 70%, #03101e 100%);
-  border-bottom: 1px solid rgba(108,176,88,0.12);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.45);
-  color: var(--brand-ink);
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  padding: clamp(18px, 3vw, 32px) clamp(16px, 3vw, 32px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.app-header__brand {
+  display: block;
+  line-height: 0;
+  text-decoration: none;
+  max-width: min(720px, 92%);
+}
+.app-header__brand-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Cap height across breakpoints so the wordmark stays balanced */
+  max-height: clamp(80px, 12.1vw, 154px);
+  object-fit: contain;
+}
+@media (max-width: 767px) {
+  .app-header {
+    padding: 22px 18px;
+  }
+  .app-header__brand {
+    max-width: 88%;
+  }
+  .app-header__brand-img {
+    max-height: 106px;
+  }
+}
+@media (max-width: 479px) {
+  .app-header {
+    padding: 20px 16px;
+  }
+  .app-header__brand-img {
+    max-height: 86px;
+  }
 }
 .app-header__inner {
   max-width: 1400px;
@@ -403,7 +467,7 @@ input[type="date"]:hover { background: #f8fafc; }
   flex-wrap: wrap;
   padding: 14px 18px;
   font-family: Arial, Helvetica, sans-serif;
-  background: #f1f5f9;
+  background: var(--paper);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   margin-top: 12px;
@@ -451,11 +515,13 @@ input[type="date"]:hover { background: #f8fafc; }
   border-color: var(--accent-hover);
 }
 .dp-input {
-  /* override the dark-header date input style — this lives on white now */
-  background: #eff2f6 !important;
-  border: 1px solid var(--border) !important;
+  /* Sit on the paper-colored date-bar — use white + a soft border so the
+     date picker reads as an interactive field. */
+  background: var(--surface) !important;
+  border: 1px solid var(--line-2) !important;
   color: var(--text) !important;
   color-scheme: light;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
 .dp-input:hover { background: var(--accent-soft) !important; }
 .dp-playing {
@@ -558,7 +624,7 @@ td {
   vertical-align: middle;
 }
 tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover { background: var(--surface-2); }
+tbody tr:hover { background: var(--accent-soft); }
 tbody tr.row-open    { background: var(--sage-50); }
 tbody tr.row-open:hover  { background: var(--sage-100); }
 tbody tr.row-soon    { background: var(--gold-50); }
@@ -837,30 +903,16 @@ tbody tr.is-fav { opacity: 1 !important; }
 </head>
 <body>
 
+<!-- TOP NOTICE BANNER -->
+<div class="notice-banner" role="status" aria-live="polite">
+  <div class="notice-banner__inner">Some course data is still being validated. For the cleanest experience, view on desktop.</div>
+</div>
+
 <!-- HEADER -->
 <header class="app-header">
-  <div class="app-header__inner">
-    <a href="#" class="app-header__logo" aria-label="Wasatch Dawn Patrol"></a>
-    <div class="app-header__words">
-      <h1 class="app-header__title">Wasatch</h1>
-      <div class="app-header__sub">Dawn Patrol</div>
-      <div class="app-header__tagline">Know when the tee times drop</div>
-    </div>
-    <div class="app-header__rule" aria-hidden="true"></div>
-    <div class="app-header__clock" aria-label="Current time">
-      <span class="glow" aria-hidden="true"></span>
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <circle class="ring" cx="50" cy="50" r="44" />
-        <line class="tick" x1="50" y1="10" x2="50" y2="16" />
-        <line class="tick" x1="90" y1="50" x2="84" y2="50" />
-        <line class="tick" x1="50" y1="90" x2="50" y2="84" />
-        <line class="tick" x1="10" y1="50" x2="16" y2="50" />
-        <line id="clock-hour"   class="hand-h" x1="50" y1="50" x2="50" y2="28" />
-        <line id="clock-minute" class="hand-m" x1="50" y1="50" x2="50" y2="20" />
-        <circle class="pivot" cx="50" cy="50" r="3" />
-      </svg>
-    </div>
-  </div>
+  <a href="#" class="app-header__brand" aria-label="Wasatch Dawn Patrol">
+    <img src="wasatch-dawn-patrol-logo.png" alt="Wasatch Dawn Patrol" class="app-header__brand-img" />
+  </a>
 </header>
 
 <!-- DATE SELECTION BAR -->
@@ -988,7 +1040,7 @@ tbody tr.is-fav { opacity: 1 !important; }
 
 /* ── Emphasis: mute already-open rows (they're usually fully booked) ── */
 tbody tr.row-open { opacity: 0.45; background: transparent !important; }
-tbody tr.row-open:hover { opacity: 0.85; background: var(--surface-2) !important; }
+tbody tr.row-open:hover { opacity: 0.85; background: var(--accent-soft) !important; }
 .b-open {
   background: transparent !important;
   color: var(--ink-3) !important;
@@ -1012,7 +1064,7 @@ tbody tr.row-soon {
   background: transparent !important;
   box-shadow: inset 3px 0 0 var(--warn);
 }
-tbody tr.row-soon:hover { background: var(--surface-2) !important; }
+tbody tr.row-soon:hover { background: var(--accent-soft) !important; }
 .b-soon {
   background: transparent !important;
   color: var(--warn-ink) !important;
