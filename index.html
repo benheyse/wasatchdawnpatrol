@@ -1240,8 +1240,8 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
   /* Data row → card */
   tbody tr[data-key] {
     display: grid;
-    grid-template-columns: 24px 1fr auto;
-    column-gap: 10px;
+    grid-template-columns: 24px minmax(0, 1fr) auto auto;
+    column-gap: 8px;
     row-gap: 3px;
     align-items: center;
     background: var(--surface);
@@ -1286,13 +1286,14 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     height: 18px;
   }
   tbody tr[data-key] > td.c-name {
-    grid-column: 2;
+    grid-column: 2 / span 2;
     grid-row: 1;
     font-size: 16px;
     font-weight: 700;
     line-height: 1.25;
     color: var(--ink);
     white-space: normal;
+    padding-left: 4px;
     padding-right: 4px;
   }
   tbody tr[data-key] > td.c-name .expand-chev {
@@ -1344,9 +1345,9 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     line-height: 1;
   }
 
-  /* Row 2 — status badge moved to row 1 col 3 (top-right of card) */
+  /* Row 1 — status badge in the top-right (col 4) */
   tbody tr[data-key] > td:nth-child(2) {
-    grid-column: 3;
+    grid-column: 4;
     grid-row: 1;
     align-self: center;
     justify-self: end;
@@ -1357,15 +1358,17 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     padding: 3px 8px;
     letter-spacing: 0.04em;
   }
-  /* Countdown moves to row 3 as a small muted subtext under the date */
+  /* Countdown — row 2 between the date (col 2) and the time pill (col 4) */
   tbody tr[data-key] > td.c-until {
-    grid-column: 2;
-    grid-row: 3;
-    text-align: left;
+    grid-column: 3;
+    grid-row: 2;
+    text-align: right;
     font-size: 11px;
     font-weight: 600;
     color: var(--ink-3);
     font-variant-numeric: tabular-nums;
+    padding: 2px 4px 0;
+    white-space: nowrap;
   }
 
   /* Row 2 — Big "When booking opens" line: date (left) · time (right) */
@@ -1382,10 +1385,19 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
     color: var(--ink-3);
   }
   tbody tr[data-key] > td:nth-child(6) {
-    grid-column: 3;
+    grid-column: 4;
     grid-row: 2;
     text-align: right;
     padding-top: 2px;
+  }
+  /* "at" connector between the countdown (col 3) and the time pill (col 4) */
+  tbody tr[data-key] > td:nth-child(6)::before {
+    content: "at ";
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-3);
+    margin-right: 4px;
+    font-variant-numeric: normal;
   }
   tbody tr[data-key] > td:nth-child(6) .b-time {
     font-size: 12px;
@@ -1403,8 +1415,8 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
   /* Phone — force visible (desktop hides via .col-phone) */
   tbody tr[data-key] > td.col-phone {
     display: block !important;
-    grid-column: 2;
-    grid-row: 4;
+    grid-column: 2 / span 2;
+    grid-row: 3;
     padding-top: 6px;
     margin-top: 2px;
     border-top: 1px dashed var(--line);
@@ -1412,8 +1424,8 @@ tbody tr.row-fresh:hover { background: color-mix(in srgb, var(--sage-600) 14%, w
   /* Website — bring back on mobile as a Visit pill on the right */
   tbody tr[data-key] > td.c-link {
     display: block;
-    grid-column: 3;
-    grid-row: 4;
+    grid-column: 4;
+    grid-row: 3;
     text-align: right;
     padding-top: 6px;
     margin-top: 2px;
